@@ -8,7 +8,7 @@ from sqlalchemy import (
     String, Text, Boolean, Integer, Float, DateTime,
     ForeignKey, JSON, UniqueConstraint, Index, FetchedValue
 )
-from sqlalchemy.dialects.postgresql import UUID, TSVECTOR, ENUM
+from sqlalchemy.dialects.postgresql import UUID, TSVECTOR, ENUM, ARRAY
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from pgvector.sqlalchemy import Vector
 
@@ -161,7 +161,7 @@ class Answer(Base):
     uncertainty_notes: Mapped[Optional[str]] = mapped_column(Text)
     synthesis_latency_ms: Mapped[Optional[int]] = mapped_column(Integer)
     model_used: Mapped[Optional[str]] = mapped_column(String(255))
-    evidence_ids: Mapped[Optional[list]] = mapped_column(JSON, default=list)
+    evidence_ids: Mapped[Optional[List[uuid.UUID]]] = mapped_column(ARRAY(UUID), default=list)
     hypotheses: Mapped[Optional[list]] = mapped_column(JSON, default=list)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow)
 

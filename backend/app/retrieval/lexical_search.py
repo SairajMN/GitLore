@@ -21,12 +21,12 @@ async def lexical_search(
     try:
         stmt = text("""
             SELECT * FROM artifacts
-            WHERE repository_id = :repo_id
-            AND search_vector @@ plainto_tsquery('english', :query)
-            ORDER BY ts_rank(search_vector, plainto_tsquery('english', :query)) DESC
-            LIMIT :limit
+            WHERE repository_id = $1
+            AND search_vector @@ plainto_tsquery('english', $2)
+            ORDER BY ts_rank(search_vector, plainto_tsquery('english', $2)) DESC
+            LIMIT $3
         """)
-        result = await session.execute(stmt, {"repo_id": str(repo_id), "query": query_text, "limit": limit})
+        result = await session.execute(stmt, (str(repo_id), query_text, limit))
         rows = result.fetchall()
         artifacts = []
         for row in rows:

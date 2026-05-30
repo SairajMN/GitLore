@@ -25,20 +25,15 @@ async def semantic_search(
         # Use cosine distance operator (<=>)
         embedding_str = "[" + ",".join(str(x) for x in query_embedding) + "]"
         stmt = text("""
-            SELECT *, 1 - (embedding <=> :embedding::vector) as similarity
+            SELECT *, 1 - (embedding <=> $4::vector) as similarity
             FROM artifacts
-            WHERE repository_id = :repo_id
+            WHERE repository_id = $1
             AND embedding IS NOT NULL
-            AND 1 - (embedding <=> :embedding::vector) > :threshold
-            ORDER BY embedding <=> :embedding::vector
-            LIMIT :limit
+            AND 1 - (embedding <=> $4::vector) > $2
+            ORDER BY embedding <=> $4::vector
+            LIMIT $3
         """)
-        result = await session.execute(stmt, {
-            "embedding": embedding_str,
-            "repo_id": str(repo_id),
-            "threshold": similarity_threshold,
-            "limit": limit,
-        })
+        result = await session.execute(stmt, (str(repo_id), similarity_threshold, limit, embedding_str))
         rows = result.fetchall()
         artifacts_with_scores = []
         for row in rows:
@@ -56,9 +51,9 @@ async def store_embedding(session: AsyncSession, artifact_id: UUID, embedding: l
     try:
         embedding_str = "[" + ",".join(str(x) for x in embedding) + "]"
         stmt = text("""
-            UPDATE artifacts SET embedding = :embedding::vector WHERE id = :id
+            UPDATE artifacts SET embedding = $2::vector WHERE id = $1
         """)
-        await session.execute(stmt, {"embedding": embedding_str, "id": str(artifact_id)})
+        await session.execute(stmt, (str(artifact_id), embedding_str))
     except Exception as e:
         logger.warning("Failed to store embedding for %s: %s", artifact_id, e)
 

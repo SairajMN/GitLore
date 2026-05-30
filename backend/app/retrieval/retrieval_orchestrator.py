@@ -156,8 +156,6 @@ async def retrieve(
 
     logger.info(
         "Retrieval complete: query='%s' results=%d sources=%s",
-        query_text[:50], len(result.artifacts), dict(
-            set(result.sources.values())
-        )
+        query_text[:50], len(result.artifacts), list(set(result.sources.values()))
     )
     return result
