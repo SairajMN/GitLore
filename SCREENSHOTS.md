@@ -1,6 +1,6 @@
 # GitLore Screenshots & Demo
 
-This document showcases GitLore in action. F
+This document showcases GitLore in action. 
 
 ---
 
