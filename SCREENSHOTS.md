@@ -1,6 +1,6 @@
 # GitLore Screenshots & Demo
 
-This document showcases GitLore in action. For the live demo, see the video below, and for an end-to-end walkthrough visit [https://gitlore.xyz](https://gitlore.xyz).
+This document showcases GitLore in action. F
 
 ---
 
