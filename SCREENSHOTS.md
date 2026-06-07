@@ -77,6 +77,3 @@ Every answer comes with confidence, evidence cards, an optional timeline, and a 
 
 ---
 
-## 🔗 Live Demo
-
-For the hosted, interactive demo: <https://gitlore.xyz>
