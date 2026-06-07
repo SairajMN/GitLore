@@ -9,6 +9,16 @@ GitLore is an AI-powered codebase archaeology system that explains *why* code ex
 **This is NOT an IDE assistant.**
 **This is a historical reasoning system for repositories.**
 
+## 🎬 Demo
+
+<https://youtu.be/PTGIIfTrbgU>
+
+<iframe width="100%" height="420" src="https://www.youtube-nocookie.com/embed/PTGIIfTrbgU?si=6I7MoDiOZMKgR48F" title="GitLore Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+📸 **See [`SCREENSHOTS.md`](./SCREENSHOTS.md) for the full screenshot walkthrough** — landing page, search, evidence view, timeline, and investigation panel.
+
+🌐 **Live demo:** [https://gitlore.xyz](https://gitlore.xyz)
+
 ## Architecture
 
 ```
